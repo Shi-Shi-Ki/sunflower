@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  peony:
+    container_name: peony
+    build: .
+    ports:
+        - 8094:8080
+    privileged: true
+    volumes:
+        - ./app:/app
+        - ./dist:/dist
+    tty: true
+    stdin_open: true
+    networks:
+        - laradock_backend
+networks:
+    laradock_backend:
+        external: true

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nuxt:
+    container_name: nuxt
+    build: ./
+    ports:
+        - 8090:8080
+    privileged: true
+    volumes:
+        - ./app:/app
+    tty: true
+    stdin_open: true
+    networks:
+        - laradock_frontend
+networks:
+    laradock_frontend:
+      external: true
