@@ -3,7 +3,7 @@ Nuxt + PHP + MySQL + TypeScriptをごちゃ混ぜに使った学習用Webアプ�
 
 ## コンテナの起動方法
 
-- laradock
+- **laradock**
 
 Laravelの本体コンテナ
 
@@ -22,12 +22,13 @@ laradock_workspace_1          /sbin/my_init                    Up      0.0.0.0:2
                                                                        0.0.0.0:8080->8080/tcp 
 ```
 
-- rose (薔薇)
+- **rose (薔薇)**
 
 Laravel製のRestAPIリソース
+
 // "laradock_workspace_1"がここのリソースに該当する
 
-- peony (牡丹)
+- **peony (牡丹)**
 
 TypeScript製のRestAPIリソースとコンテナ
 
@@ -54,7 +55,7 @@ Example app listening on port 8080!
 // ここまで来れば成功
 ```
 
-- wisteria （藤）
+- **wisteria （藤）**
 
 Nuxt製のViewリソースとコンテナ
 
