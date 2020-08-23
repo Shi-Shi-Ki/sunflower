@@ -8,7 +8,9 @@ Nuxt + PHP + MySQL + TypeScriptをごちゃ混ぜに使った学習用Webアプ�
 Laravelの本体コンテナ
 
 ```
-$ docker-compose up -d mysql nginx phpmyadmin  // この３つで必ず指定すること、そうでないと他のコンテナまで作られてしまう
+$ docker-compose up -d mysql nginx phpmyadmin
+// この３つで必ず指定すること、そうでないと他のコンテナまで作られてしまうので注意
+...
 
 $ docker-compose ps
            Name                          Command               State                                                              Ports                                                           
@@ -21,13 +23,65 @@ laradock_phpmyadmin_1         /docker-entrypoint.sh apac ...   Up      0.0.0.0:8
 laradock_workspace_1          /sbin/my_init                    Up      0.0.0.0:2222->22/tcp, 0.0.0.0:3000->3000/tcp, 0.0.0.0:3001->3001/tcp, 0.0.0.0:4200->4200/tcp, 0.0.0.0:8001->8000/tcp,      
                                                                        0.0.0.0:8080->8080/tcp 
 ```
-コンテナに入ってからmigrate実行
+@ databaseの作成
+// rootの接続情報は**laradock**の.envを参照
+
+```
+$ docker-compose exec mysql bash
+
+root@xxxxxxxxxxxx:/#
+
+root@xxxxxxxxxxxx:/# mysql -u root -proot
+...
+
+mysql> grant select,update,delete,create,drop,index,alter,insert on *.* to 'laradock'@'%';
+// アプリで使用する"laradock"ユーザの権限を設定（例は最低限必要な権限）
+
+mysql> exit
+
+mysql> mysql -u laradock -psecret
+...
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| laradock           |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+mysql> create database rose;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| laradock           |
+| mysql              |
+| performance_schema |
+| rose               | // OK
+| sys                |
++--------------------+
+```
+
+@ migrate実行
 
 ```
 $ docker-compose exec workspace bash
+
 root@xxxxxxxxxxxx:/var/www# 
+
 root@xxxxxxxxxxxx:/var/www# cd rose/
+
+root@xxxxxxxxxxxx:/var/www# composer install
+...
 root@xxxxxxxxxxxx:/var/www# php artisan migrate
+...
 ```
 
 - **rose (薔薇)**
@@ -35,6 +89,7 @@ root@xxxxxxxxxxxx:/var/www# php artisan migrate
 Laravel製のRestAPIリソース
 
 // "laradock_workspace_1"がここのリソースに該当する
+// 直接"rose"ディレクトリのリソースを編集しても良い
 
 - **peony (牡丹)**
 
