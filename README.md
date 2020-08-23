@@ -10,6 +10,7 @@ Laravelの本体コンテナ
 ```
 $ docker-compose up -d mysql nginx phpmyadmin
 // この３つで必ず指定すること、そうでないと他のコンテナまで作られてしまうので注意
+// 初回は少々時間がかかる...
 ...
 
 $ docker-compose ps
@@ -23,7 +24,25 @@ laradock_phpmyadmin_1         /docker-entrypoint.sh apac ...   Up      0.0.0.0:8
 laradock_workspace_1          /sbin/my_init                    Up      0.0.0.0:2222->22/tcp, 0.0.0.0:3000->3000/tcp, 0.0.0.0:3001->3001/tcp, 0.0.0.0:4200->4200/tcp, 0.0.0.0:8001->8000/tcp,      
                                                                        0.0.0.0:8080->8080/tcp 
 ```
-@ databaseの作成  
+
+nginxの設定は以下のディレクトリに含まれる
+
+```
+$ ll laradock/nginx/sites/
+...
+-rw-r--r--   1 User  staff  1189  8 14 21:10 pj01_rose.conf
+...
+```
+
+コンテナが無事に作成できたら、以下の設定を行う
+
+```
+1: databaseの作成
+2: migrateの実行
+3: ホスト側のhostsの設定
+```
+
+1: databaseの作成  
   
 // rootユーザの接続情報は**laradock**の.envを参照  
 // laradockユーザの接続情報は**rose**の.envを参照
@@ -71,7 +90,8 @@ mysql> show databases;
 +--------------------+
 ```
 
-@ migrate実行
+2: migrate実行  
+// **必ず1:の後で行うこと**
 
 ```
 $ docker-compose exec workspace bash
@@ -84,6 +104,19 @@ root@xxxxxxxxxxxx:/var/www# composer install
 ...
 root@xxxxxxxxxxxx:/var/www# php artisan migrate
 ...
+```
+
+3: ホスト側のhostsの設定  
+// コマンドはmacで行った時の物
+
+```
+$ sudo vi /private/etc/hosts
+
+// 以下を追加する
+~ ここから ~
+127.0.0.1   rose.local
+::1         rose.local
+~ ここまで ~
 ```
 
 - **rose (薔薇)**
@@ -108,7 +141,8 @@ peony   docker-entrypoint.sh node   Up      0.0.0.0:8094->8080/tcp, 8094/tcp
 $ docker-compose exec peony bash
 root@xxxxxxxxxxxx:/app#
 
-root@xxxxxxxxxxxx:/app# npm install  // node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
+root@xxxxxxxxxxxx:/app# npm install
+// node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
 ...
 root@xxxxxxxxxxxx:/app# npm run ts-node-dev index.ts
 > peony@1.0.0 ts-node-dev /app
@@ -136,7 +170,11 @@ $ docker-compose exec nuxt bash
 
 root@xxxxxxxxxxxx:/app#
 
-root@xxxxxxxxxxxx:/app# npm install  // node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
+root@xxxxxxxxxxxx:/app# npm install
+// node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
 ...
 root@xxxxxxxxxxxx:/app# npm run dev
 ```
+
+laradockコンテナ群とwisteria(nuxt)コンテナが無事に起動ができたら、以下のURLにアクセスするとアプリを確認することができる  
+http://0.0.0.0:8090/memo
