@@ -21,6 +21,14 @@ laradock_phpmyadmin_1         /docker-entrypoint.sh apac ...   Up      0.0.0.0:8
 laradock_workspace_1          /sbin/my_init                    Up      0.0.0.0:2222->22/tcp, 0.0.0.0:3000->3000/tcp, 0.0.0.0:3001->3001/tcp, 0.0.0.0:4200->4200/tcp, 0.0.0.0:8001->8000/tcp,      
                                                                        0.0.0.0:8080->8080/tcp 
 ```
+コンテナに入ってからmigrate実行
+
+```
+$ docker-compose exec workspace bash
+root@xxxxxxxxxxxx:/var/www# 
+root@xxxxxxxxxxxx:/var/www# cd rose/
+root@xxxxxxxxxxxx:/var/www# php artisan migrate
+```
 
 - **rose (薔薇)**
 
@@ -41,11 +49,11 @@ Name             Command            State                Ports
 peony   docker-entrypoint.sh node   Up      0.0.0.0:8094->8080/tcp, 8094/tcp
 
 $ docker-compose exec peony bash
-root@a8902e74f551:/app#
+root@xxxxxxxxxxxx:/app#
 
-root@a8902e74f551:/app# npm install  // node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
+root@xxxxxxxxxxxx:/app# npm install  // node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
 ...
-root@a8902e74f551:/app# npm run ts-node-dev index.ts
+root@xxxxxxxxxxxx:/app# npm run ts-node-dev index.ts
 > peony@1.0.0 ts-node-dev /app
 > ts-node-dev --respawn "index.ts"
 
@@ -69,9 +77,9 @@ nuxt   docker-entrypoint.sh node   Up      0.0.0.0:8090->8080/tcp, 8090/tcp
 
 $ docker-compose exec nuxt bash
 
-root@af66918712c8:/app#
+root@xxxxxxxxxxxx:/app#
 
-root@af66918712c8:/app# npm install  // node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
+root@xxxxxxxxxxxx:/app# npm install  // node_moduleはgitに含めていないので、初回はモジュールのインストールを行う
 ...
-root@af66918712c8:/app# npm run dev
+root@xxxxxxxxxxxx:/app# npm run dev
 ```
