@@ -23,8 +23,10 @@ laradock_phpmyadmin_1         /docker-entrypoint.sh apac ...   Up      0.0.0.0:8
 laradock_workspace_1          /sbin/my_init                    Up      0.0.0.0:2222->22/tcp, 0.0.0.0:3000->3000/tcp, 0.0.0.0:3001->3001/tcp, 0.0.0.0:4200->4200/tcp, 0.0.0.0:8001->8000/tcp,      
                                                                        0.0.0.0:8080->8080/tcp 
 ```
-@ databaseの作成
-// rootの接続情報は**laradock**の.envを参照
+@ databaseの作成  
+  
+// rootユーザの接続情報は**laradock**の.envを参照  
+// laradockユーザの接続情報は**rose**の.envを参照
 
 ```
 $ docker-compose exec mysql bash
@@ -86,9 +88,9 @@ root@xxxxxxxxxxxx:/var/www# php artisan migrate
 
 - **rose (薔薇)**
 
-Laravel製のRestAPIリソース
+Laravel製のRestAPIリソース  
 
-// "laradock_workspace_1"がここのリソースに該当する
+// "laradock_workspace_1"がここのリソースに該当する  
 // 直接"rose"ディレクトリのリソースを編集しても良い
 
 - **peony (牡丹)**
