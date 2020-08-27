@@ -2,8 +2,8 @@
 import { BaseModel } from '../models/BaseModel';
 
 export interface ITest {
-	//res: object;
-    res: string;
+	res: object;
+    //res: string;
 }
 
 export class ConTestDbService {
@@ -42,7 +42,8 @@ export class ConTestDbService {
 			console.log(res);
 		});
 		return {
-			res: 'empty return...'
+			//res: 'empty return...'
+            res: {}
 		}
 /*
 		const result = await m.selectAll('memos');
@@ -53,4 +54,12 @@ export class ConTestDbService {
 		}
 */
 	}
+
+	public async connectSample(): Promise<ITest> {
+		const m = new BaseModel();
+		const result = await m.selectAll('memos');
+		return {
+			res: result
+		}
+    }
 }
