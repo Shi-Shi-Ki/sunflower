@@ -126,6 +126,25 @@ Laravel製のRestAPIリソース
 // "laradock_workspace_1"がここのリソースに該当する  
 // 直接"rose"ディレクトリのリソースを編集しても良い
 
+APIリストはartisanで確認
+
+```
+root@xxxxxxxxxxxx:/var/www/rose# php artisan route:list
++--------+-----------+----------------------+-----------------+----------------------------------------------------+------------+
+| Domain | Method    | URI                  | Name            | Action                                             | Middleware |
++--------+-----------+----------------------+-----------------+----------------------------------------------------+------------+
+|        | GET|HEAD  | /                    |                 | Closure                                            | web        |
+|        | GET|HEAD  | api/memos            | memos.index     | App\Http\Controllers\Api\MemosController@index     | api        |
+|        | POST      | api/memos            | memos.store     | App\Http\Controllers\Api\MemosController@store     | api        |
+|        | GET|HEAD  | api/memos/{memo}     | memos.show      | App\Http\Controllers\Api\MemosController@show      | api        |
+|        | PUT|PATCH | api/memos/{memo}     | memos.update    | App\Http\Controllers\Api\MemosController@update    | api        |
+|        | DELETE    | api/memos/{memo}     | memos.destroy   | App\Http\Controllers\Api\MemosController@destroy   | api        |
+
+~ 中略 ~
+
++--------+-----------+----------------------+-----------------+----------------------------------------------------+------------+
+```
+
 - **peony (牡丹)**
 
 TypeScript製のRestAPIリソースとコンテナ
@@ -178,3 +197,34 @@ root@xxxxxxxxxxxx:/app# npm run dev
 
 laradockコンテナ群とwisteria(nuxt)コンテナが無事に起動ができたら、以下のURLにアクセスするとアプリを確認することができる  
 http://0.0.0.0:8090/memo
+
+## トラブルシューティング
+
+### rose
+
+- **artisanでエラーになる場合**
+
+```
+root@xxxxxxxxxxxx:/var/www/rose# php artisan route:list
+PHP Fatal error:  Uncaught Error: Class 'Illuminate\Foundation\Application' not found in /var/www/rose/bootstrap/app.php:14
+Stack trace:
+#0 /var/www/rose/artisan(20): require_once()
+#1 {main}
+  thrown in /var/www/rose/bootstrap/app.php on line 14
+```
+
+このエラーが出た場合はcomposerでinstallを行うと、artisanが使えるようになる。
+一度コンテナを作り直したりすると発生する可能性がある。
+
+```
+root@xxxxxxxxxxxx:/var/www/rose# composer install
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+
+Package operations: 101 installs, 0 updates, 0 removals
+  - Installing voku/portable-ascii (1.5.3): Downloading (100%)
+
+~ 中略（インストールまで少し時間がかかる） ~
+
+Package manifest generated successfully.
+```
