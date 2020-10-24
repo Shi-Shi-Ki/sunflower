@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MemosStoreRequest;
 use App\Models\Memos;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class MemosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    //public function store(Request $request)
+    public function store(MemosStoreRequest $request)
     {
         $memo = new Memos();
 		$memo->user_id = 1;//todo
@@ -65,6 +67,9 @@ class MemosController extends Controller
     public function update(Request $request, $id)
     {
         $data = Memos::find($id);
+//\Log::debug(print_r($data,true));
+//\Log::debug(print_r($request->title,true));
+//\Log::debug(print_r($request->body,true));
 		$data->title = $request->title;
 		$data->body = $request->body;
 		$data->mark_color = $request->mark_color;
