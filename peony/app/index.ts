@@ -34,7 +34,8 @@ app.get('/test', (req: express.Request, res: express.Response) => {
 
 app.get('/conTestDb', (req: express.Request, res: express.Response) => {
 	const service = new ConTestDbService();
-	service.select().then(result => res.status(200).send(result));
+	//service.select().then(result => res.status(200).send(result));
+	service.connectSample().then(result => res.status(200).send(result));
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

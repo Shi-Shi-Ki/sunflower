@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +53,23 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        return parent::render($request, $exception);
+        $status = 500;
+        $message = $exception->getMessage();
+        if ($exception instanceof AuthenticationException) {
+            // oauth error
+            $status = 401;
+        } else if ($exception instanceof TokenMismatchException) {
+            // csrf token error.
+            $status = 421;
+        } else if ($this->isHttpException($exception)) {
+            // apis error
+            $status = $exception->getStatusCode();
+        }
+        return new JsonResponse([
+            'errors' => [
+                'message' => $message
+            ]
+        ], $status);
+        //return parent::render($request, $exception);
     }
 }
