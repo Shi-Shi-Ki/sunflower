@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MemosStoreRequest;
 use App\Models\Memos;
+use App\Exceptions\Api\ApiException;
 use Illuminate\Http\Request;
 
 class MemosController extends Controller
@@ -42,6 +43,7 @@ class MemosController extends Controller
 		$memo->title = $request->title;
 		$memo->body = $request->body;
 		$memo->mark_color = $request->mark_color;//todo
+//throw new ApiException('exception test!!');
 		return $memo->save();
     }
 

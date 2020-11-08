@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class MemosStoreRequest extends BaseRequest
+class LoginRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,15 @@ class MemosStoreRequest extends BaseRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255',
-            'content' => 'required|string|max:1024',
+            'user_id' => 'required|string|max:20',
+            'password' => 'required|min:6|max:12',
         ];
     }
 
     public function attributes() {
         return [
-            'title' => 'タイトル',
-            'content' => 'メモ内容',
+            'user_id' => 'ユーザID',
+            'password' => 'パスワード',
         ];
     }
 }
