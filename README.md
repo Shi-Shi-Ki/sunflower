@@ -105,6 +105,7 @@ root@xxxxxxxxxxxx:/var/www# composer install
 root@xxxxxxxxxxxx:/var/www# php artisan migrate
 ...
 ```
+"oauth_*"というテーブルが作られるので、これらも作成されていればOK!
 
 3: ホスト側のhostsの設定  
 // コマンドはmacで行った時の物
@@ -118,6 +119,30 @@ $ sudo vi /private/etc/hosts
 ::1         rose.local
 ~ ここまで ~
 ```
+
+4: keyの発行
+
+API認証用のキーを発行する。
+
+```
+# php artisan passport:install
+Encryption keys generated successfully.
+Personal access client created successfully.
+Client ID: 1
+Client secret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+Password grant client created successfully.
+Client ID: 2
+Client secret: yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+```
+"oauth_clients"にこれらのキー情報がinsertされていればOK!
+
+5: token発行
+
+//todo
+
+6: API接続テスト
+
+//todo
 
 - **rose (薔薇)**
 
