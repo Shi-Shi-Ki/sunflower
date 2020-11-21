@@ -203,14 +203,14 @@ Example app listening on port 8080!
 Nuxt製のViewリソースとコンテナ
 
 ```
-$ docker-compose up -d nuxt
+$ docker-compose up -d wisteria
 
 $ docker-compose ps
-Name            Command            State                Ports              
----------------------------------------------------------------------------
-nuxt   docker-entrypoint.sh node   Up      0.0.0.0:8090->8080/tcp, 8090/tcp
+Name            Command            State                                Ports                          
+-------------------------------------------------------------------------------------------------------
+wisteria   docker-entrypoint.sh node   Up      0.0.0.0:8090->8080/tcp, 0.0.0.0:8091->8081/tcp, 8090/tcp
 
-$ docker-compose exec nuxt bash
+$ docker-compose exec wisteria bash
 
 root@xxxxxxxxxxxx:/app#
 
@@ -222,6 +222,9 @@ root@xxxxxxxxxxxx:/app# npm run dev
 
 laradockコンテナ群とwisteria(nuxt)コンテナが無事に起動ができたら、以下のURLにアクセスするとアプリを確認することができる  
 http://0.0.0.0:8090/memo
+
+storybookへのアクセス
+http://0.0.0.0:8091/
 
 ## トラブルシューティング
 
