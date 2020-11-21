@@ -223,7 +223,7 @@ root@xxxxxxxxxxxx:/app# npm run dev
 laradockコンテナ群とwisteria(nuxt)コンテナが無事に起動ができたら、以下のURLにアクセスするとアプリを確認することができる  
 http://0.0.0.0:8090/memo
 
-storybookへのアクセス
+storybookへのアクセス  
 http://0.0.0.0:8091/
 
 ## トラブルシューティング
