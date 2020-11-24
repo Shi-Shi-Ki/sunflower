@@ -1,11 +1,12 @@
 version: '3'
 
 services:
-  nuxt:
-    container_name: nuxt
+  wisteria:
+    container_name: wisteria
     build: ./
     ports:
         - 8090:8080
+        - 8091:8081
     privileged: true
     volumes:
         - ./app:/app

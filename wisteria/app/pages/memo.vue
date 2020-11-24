@@ -15,10 +15,8 @@
               name="title"
               class="title"
               size="40"
-              @focus="set_flg"
             />
           </td>
-          <td><v-btn @click="find">find</v-btn></td>
         </tr>
         <tr>
           <th>Memo</th>
@@ -36,9 +34,15 @@
         <tr>
           <th></th>
           <td>
-            <v-btn @click="insert">save</v-btn>
+            <span v-if="id == 0">
+              <v-btn @click="insert">save</v-btn>
+            </span>
+            <span v-else>
+              <v-btn @click="clearForm">clear</v-btn>
+              <v-btn @click="update">update</v-btn>
+            </span>
             <transition name="del">
-              <v-btn v-if="sel_item !== null" @click="remove">delete</v-btn>
+              <v-btn v-if="id != 0" @click="remove">delete</v-btn>
             </transition>
           </td>
           <td>&nbsp;</td>
@@ -68,15 +72,15 @@
 /* eslint-disable */
 import axios from 'axios'
 const API_URL = 'http://rose.local/api/memos';
+
 export default {
   data() {
     return {
+      id: 0,
       title: '',
       content: '',
       num_per_page: 5,
-      find_flg: false,
       sel_item: null,
-      //memo_data: [],
       memo_data: null,
       current_page_num: 0,
     }
@@ -84,7 +88,6 @@ export default {
   // (init showed only) get history data.
   async asyncData() {
     const res = await axios.get(API_URL)
-    //return { memo_data: res.data }
     // Object -> Map
     let data = new Map()
     for (const key of Object.keys(res.data)) {
@@ -95,27 +98,9 @@ export default {
   // "computed" in no support async processing!!
   // https://teratail.com/questions/181043
   computed: {
-    //memo() {
-    //  return this.$store.state.memo.memo
-    //},
     // get page items.
+    // https://qiita.com/Nossa/items/e2092d5aca2540485591
     page_items() {
-      //return this.memo_data.slice(
-      //  this.num_per_page * this.current_page_num,
-      //  this.num_per_page * (this.current_page_num + 1)
-      //)
-      // https://qiita.com/Nossa/items/e2092d5aca2540485591
-/*
-      const sliceKeyArr = Object.keys(this.memo_data).slice(
-        this.num_per_page * this.current_page_num,
-        this.num_per_page * (this.current_page_num + 1)
-      )
-      let res = new Map()
-      for (const key of sliceKeyArr) {
-        res.set(key, this.memo_data[key])
-      }
-      return res
-*/
       const sliceArr = Array.from(this.memo_data).slice(
         this.num_per_page * this.current_page_num,
         this.num_per_page * (this.current_page_num + 1)
@@ -144,20 +129,13 @@ export default {
     },
   },
   created() {
-    //this.$store.commit('memo/set_page', 0)
-// test OK!
-//axios.get('http://0.0.0.0:8094/helloworld').then((res) => {
-//  console.log(res)
-//});
   },
   methods: {
-    set_flg() {
-      if (this.find_flg || this.sel_item !== null) {
-        this.find_flg = false
-        this.sel_item = null
-        this.title = ''
-        this.content = ''
-      }
+    // clear memo form.
+    clearForm() {
+      this.id = 0
+      this.title = ''
+      this.content = ''
     },
     // saved memo data.
     insert() {
@@ -166,23 +144,28 @@ export default {
         body: this.content,
       }).then((res) => {
         // get new history data.
-        axios.get(API_URL).then((res) => {
-          this.memo_data = new Map()
-          let data = new Map()
-          for (const key of Object.keys(res.data)) {
-            data.set(key, res.data[key])
-          }
-          this.memo_data = data
-          alert('saved memo.')
-        });
+        this._getHistory('saved memo.')
       })
+      this.id = 0
+      this.title = ''
+      this.content = ''
+    },
+    // update memo data.
+    update() {
+      axios.put(API_URL +`/${this.sel_item.id}`, {
+        title: this.title,
+        body: this.content,
+      }).then((res) => {
+        this._getHistory('updated memo.')
+      })
+      this.id = 0
       this.title = ''
       this.content = ''
     },
     // click history item event.
     select(item) {
-      this.find_flg = false
       this.sel_item = item
+      this.id = item.id
       this.title = item.title
       this.content = item.body
     },
@@ -199,18 +182,28 @@ export default {
         this.sel_item = null
         alert('delted item.')
       })
+      this.id = 0
       this.title = ''
       this.content = ''
-    },
-    find() {
-      this.sel_item = null
-      this.find_flg = true
     },
     next() {
       this.page++
     },
     prev() {
       this.page--
+    },
+    // get new history data.
+    _getHistory(informationMessage) {
+      axios.get(API_URL).then((res) => {
+        this.memo_data = new Map()
+        let data = new Map()
+        for (const key of Object.keys(res.data)) {
+          data.set(key, res.data[key])
+        }
+        this.memo_data = data
+
+        alert(informationMessage)
+      });
     },
   },
 }
