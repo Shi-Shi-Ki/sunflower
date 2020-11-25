@@ -228,7 +228,21 @@ http://0.0.0.0:8091/
 
 ## トラブルシューティング
 
-### rose
+### docker系
+
+- **pullしてリソースを更新したがコンテナが上手く起動しなくなった場合**
+
+どうにも動かないなら完全にクリアして作り直すと良い。  
+＊コンテナごと消えるのでパッケージの再インストールも忘れずに
+
+ex) roseコンテナ
+```
+$ docker-compose down --remove-orphans
+...
+$ docker-compose up -d --build mysql nginx phpmyadmin
+```
+
+### roseコンテナ
 
 - **artisanでエラーになる場合**
 
