@@ -6,9 +6,11 @@ export default {
   component: Label,
 }
 
-// export const Basic = (argTypes) => ({
-export const Basic = () => ({
+const Template = (arg, {argTypes}) => ({
+// export const Basic = () => ({
   components: { Label },
+  props: Object.keys(argTypes),
+  /*
   props: {
     text: {
       type: String,
@@ -25,5 +27,10 @@ export const Basic = () => ({
       ),
     },
   },
-  template: `<Label :class="className" :text="text"/>`,
+  */
+  //template: `<Label :class="className">{{ text }}</Label>`,
+  template: `<Label>{{ text }}</Label>`,
 })
+
+export const Primary = Template.bind({})
+Primary.args = { text: 'TEST' }
