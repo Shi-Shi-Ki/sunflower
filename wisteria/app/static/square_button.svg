@@ -1,12 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="245" height="106" viewBox="0 0 245 106">
   <defs>
     <style>
+      svg {
+        overflow: visible;
+        filter:
+          drop-shadow(2px 2px 2px #267200)
+          drop-shadow(-2px 2px 2px #267200)
+          drop-shadow(2px -2px 2px #267200)
+          drop-shadow(-2px -2px 2px #267200);
+      }
       .cls-1, .cls-2 {
         fill: #38b700;
       }
 
       .cls-1 {
-        stroke: #707070;
+        stroke: #267200;
       }
 
       .cls-3 {

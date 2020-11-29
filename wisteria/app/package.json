@@ -6,7 +6,7 @@
     "dev": "nuxt-ts",
     "storybook": "start-storybook -p 8081 -c .storybook",
     "buid-storybook": "build-storybook -s public",
-    "lint:js": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+    "lint:js": "eslint --fix --ext .vue --ignore-path .gitignore .",
     "test": "jest"
   },
   "lint-staged": {
@@ -73,6 +73,7 @@
     "node-sass": "^4.14.1",
     "prettier": "^2.1.2",
     "sass-loader": "^8.0.2",
-    "vue-jest": "^3.0.7"
+    "vue-jest": "^3.0.7",
+    "vue-svg-loader": "^0.16.0"
   }
 }

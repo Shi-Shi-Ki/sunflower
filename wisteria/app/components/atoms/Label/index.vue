@@ -1,5 +1,10 @@
 <template>
-  <component :is="label" class="label-h1"><slot></slot></component>
+  <component
+    :is="label"
+    :class="'label-' + styleName"
+    :style="{ color: textColor }"
+    ><slot></slot
+  ></component>
 </template>
 
 <script lang="ts">
@@ -11,40 +16,34 @@ export default defineComponent({
       type: String,
       default: 'div',
     },
+    styleName: {
+      type: String,
+      default: 'h1',
+    },
+    textColor: {
+      type: String,
+      default: '#000',
+    },
   },
 })
-
-/*
-export default {
-  name: 'TextElement',
-  props: {
-    text: {
-      type: String,
-      default: 'Sample',
-    },
-    className: {
-      type: String,
-      default: 'textElement-h1',
-    },
-  },
-}
-*/
 </script>
 
 <style lang="scss">
-@mixin base_style($fontSize, $color) {
+@mixin base_style($fontSize) {
   font-family: 'Hiragino Kaku Gothic ProN';
   font-weight: normal;
   text-align: left;
-  font-size: $fontSize;
-  color: $color;
+  font-size: #{$fontSize}px;
 }
 .label {
   &-h1 {
-    @include base_style(40px, #f00);
+    @include base_style(40);
   }
   &-h2 {
-    @include base_style(20px, #000);
+    @include base_style(20);
+  }
+  &-h3 {
+    @include base_style(15);
   }
 }
 </style>
