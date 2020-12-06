@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="63" viewBox="0 0 500 63">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #c3c3c3;
+        stroke-width: 3px;
+      }
+
+      .cls-2 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="user_name_form" class="cls-1">
+    <rect class="cls-2" width="500" height="63" rx="10"/>
+    <rect class="cls-3" x="1.5" y="1.5" width="497" height="60" rx="8.5"/>
+  </g>
+</svg>

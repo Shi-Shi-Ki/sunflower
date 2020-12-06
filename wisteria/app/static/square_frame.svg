@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="723" height="834" viewBox="0 0 723 834">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #ff8900;
+        stroke-linejoin: round;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="login_backend" class="cls-1">
+    <rect class="cls-2" width="723" height="834" rx="50"/>
+    <rect class="cls-3" x="2.5" y="2.5" width="718" height="829" rx="47.5"/>
+  </g>
+</svg>

@@ -22,6 +22,7 @@ export default defineComponent({
   },
 })
 </script>
+
 <style lang="scss">
 .square_button {
   position: relative;

@@ -6,7 +6,9 @@
       </p>
       <div class="sample_btn">
         <SampleButton />
-        <div class="btn_label">PASS WORD</div>
+        <div class="btn_label">
+          <Label>{{ text }}</Label>
+        </div>
       </div>
       <img src="/v.png" alt="Vuetify.js" class="mb-5" />
       <blockquote class="blockquote">
