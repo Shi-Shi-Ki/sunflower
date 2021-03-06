@@ -1,5 +1,6 @@
-import colors from 'vuetify/es5/util/colors'
+//import colors from 'vuetify/es5/util/colors'
 
+const path = require("path");
 export default {
   /*
    ** Nuxt rendering mode
@@ -27,7 +28,9 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@/static/common.scss',
+  ],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -39,7 +42,7 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify',
+    //'@nuxtjs/vuetify',
     // '@nuxtjs/composition-api',
     '@nuxt/typescript-build',
   ],
@@ -60,6 +63,7 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
+/*
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -77,6 +81,7 @@ export default {
       },
     },
   },
+*/
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
@@ -89,6 +94,14 @@ export default {
         test: /\.svg$/,
         loader: 'vue-svg-loader',
       })
+    },
+  },
+  resolve: {
+    extensions: ['.js', '.json', '.vue', '.ts'],
+    root: path.resolve(__dirname),
+    alias: {
+      '@': path.resolve(__dirname),
+      '~': path.resolve(__dirname),
     },
   },
   server: {

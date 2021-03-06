@@ -24,7 +24,7 @@ module.exports = {
             use: ['vue-svg-loader'],
             resolve: {
                 alias: {
-                    '@': path.resolve(__dirname, '../static'),
+                    '@/static': path.resolve(__dirname, '../static'),
                 },
             },
         });
@@ -39,7 +39,14 @@ module.exports = {
                 },
             }],
         });
-        config.resolve.extensions.push('.ts', '.vue');
+        config.module.rules.push({
+            test: /\.(ts|vue)$/,
+            resolve: {
+                alias: {
+                    '@/static': path.resolve(__dirname, '../static'),
+                },
+            },
+        });
         return config;
     },
 };

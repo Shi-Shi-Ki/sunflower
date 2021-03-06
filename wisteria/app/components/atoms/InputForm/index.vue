@@ -1,23 +1,30 @@
 <template>
-  <div id="input_frame">
-    <component
-      :is="ifFrame"
-      :class="'ifframe-' + styleName"
+  <div class="input_form">
+    <component :is="ifFrame">
+      <InputFormFrame class="frame_image" />
+      <input
+        type="text"
+        :class="'input_text-' + inputTextColor"
+        placeholder=" "
+      />
+      <div
+        class="placeholder_text"
+        :class="'placeholder_bg_color-' + placeholderBgColor"
       >
-      <InputFormFrame id="input_frame" />
-      <div id="placeholder_text"><slot /></div>
+        <slot />
+      </div>
     </component>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import InputFormFrame from '/app/static/input_form.svg'
+import InputFormFrame from '@/static/input_form.svg'
 
 export default defineComponent({
   name: 'InputForm',
   components: {
-    InputFormFrame
+    InputFormFrame,
   },
   props: {
     ifFrame: {
@@ -28,30 +35,18 @@ export default defineComponent({
       type: String,
       default: 'normal',
     },
+    placeholderBgColor: {
+      type: String,
+      default: 'w',
+    },
+    inputTextColor: {
+      type: String,
+      default: 'w',
+    },
   },
 })
 </script>
 
 <style lang="scss">
-@mixin base_style($fontColor) {
-  #placeholder_text {
-    position: absolute;
-    width: auto;
-    height: auto;
-    top: 19px;
-    left: 19px;
-    max-width: 100%;
-    max-height: 100%;
-    margin: auto;
-    color: $fontColor;
-  }
-}
-#input_frame {
-  position: relative;
-}
-.ifframe {
-  &-normal {
-    @include base_style(#ccc)
-  }
-}
+@import './index.scss';
 </style>

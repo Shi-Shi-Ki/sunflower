@@ -9,8 +9,8 @@ export default {
 const Template = (arg, { argTypes }) => ({
   components: { InputForm },
   props: Object.keys(argTypes),
-  template: '<InputForm>{{ text }}</InputForm>',
+  template: '<InputForm>{{ placeholder_text }}</InputForm>',
 })
 
 export const Primary = Template.bind({})
-Primary.args = { text: 'TEST' }
+Primary.args = { placeholder_text: 'LOGIN ID', }

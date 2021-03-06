@@ -9,8 +9,8 @@ export default {
 const Template = (arg, { argTypes }) => ({
   components: { SquareButton },
   props: Object.keys(argTypes),
-  template: `<SquareButton>{{ label }}</SquareButton>`,
+  template: `<SquareButton :styleName="styleName">{{ label }}</SquareButton>`,
 })
 
 export const Primary = Template.bind({})
-Primary.args = { label: 'LOGIN', }
+Primary.args = { label: 'LOGIN', styleName: 'G' }

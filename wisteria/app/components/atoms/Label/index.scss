@@ -1,0 +1,34 @@
+@mixin base_style($fontSize) {
+  display: inline-block;
+  font-family: 'Hiragino Kaku Gothic ProN';
+  font-weight: normal;
+  font-size: #{$fontSize}px;
+  &.text-color {
+    &-w {
+      color: #fff;
+    }
+    &-k {
+      color: #000;
+    }
+    &-a {
+      color: #ccc;
+    }
+  }
+}
+.label {
+  &-h1 {
+    @include base_style(40);
+  }
+  &-h2 {
+    @include base_style(30);
+  }
+  &-h3 {
+    @include base_style(20);
+  }
+  &-h4 {
+    @include base_style(15);
+  }
+  &-h5 {
+    @include base_style(10);
+  }
+}

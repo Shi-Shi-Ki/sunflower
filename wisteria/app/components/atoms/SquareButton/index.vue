@@ -1,38 +1,39 @@
 <template>
-  <component :is="sqButton" class="square_button">
-    <ButtonImage />
+  <div class="square_button" @click="submit">
+    <component :is="buttonSize"></component>
     <div class="square_button_text"><slot /></div>
-  </component>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import ButtonImage from '/app/static/square_button.svg'
 
 export default defineComponent({
   name: 'SquareButton',
   components: {
-    ButtonImage,
+    middleBtn: () => import('@/static/square_button-m-g.svg'),
+    smallBtn: () => import('@/static/square_button-s-g.svg'),
   },
   props: {
-    sqButton: {
+    buttonSize: {
       type: String,
-      default: 'div',
+      default: 'middleBtn',
     },
+    buttonColor: {
+      type: String,
+      default: 'g',
+    },
+  },
+  setup() {
+    const submit = () => console.log('press submit button!')
+
+    return {
+      submit,
+    }
   },
 })
 </script>
 
 <style lang="scss">
-.square_button {
-  position: relative;
-  text-align: center;
-  color: white;
-}
-.square_button_text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+@import './index.scss';
 </style>

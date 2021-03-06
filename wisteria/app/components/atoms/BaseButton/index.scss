@@ -1,0 +1,18 @@
+.base_button {
+  position: relative;
+  display: inline-block;
+  & .base_button_slot {
+    position: absolute;
+    display: inline-block;
+    &-default {
+      width: auto;
+      height: auto;
+      // relative+absoluteを使った場合のセンタリング方法
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+    }
+  }
+}
