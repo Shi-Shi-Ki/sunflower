@@ -1,7 +1,5 @@
 import { text, select } from '@storybook/addon-knobs'
-import { BaseText } from '../components/atoms/BaseText'
-import { BaseButton } from '../components/atoms/BaseButton'
-import { SubmitButton } from '../components/molecules/button/SubmitButton'
+import { SubmitButton } from '../components/molecules/buttons/SubmitButton'
 
 export default {
   title: 'SubmitButton',
@@ -27,7 +25,7 @@ Primary.args = {
   disabled: false,
   onClick: () => {
     console.log("submit button click!")
-  }
+  },
   fontStyle: 'h4',
   fontColor: 'w'
 }

@@ -62,13 +62,17 @@ export default defineComponent({
     const errorMessage = ref('')
 
     const apiLoader = async () => {
-      isWaiting.value = true
-      const result = await props.onClick()
-      isWaiting.value = false
-      if (!!result && result.status === 200) {
-        isSuccess.value = true
-      } else {
-        errorMessage.value = result.errorMessage
+      try {
+        isWaiting.value = true
+        const result = await props.onClick()
+        isWaiting.value = false
+        if (!!result && result.status === 200) {
+          isSuccess.value = true
+        } else {
+          errorMessage.value = result.errorMessage
+        }
+      } catch(e) {
+        console.log(e)
       }
     }
 

@@ -8,8 +8,15 @@ module.exports = {
         '@storybook/addon-actions',
         '@storybook/addon-storysource',
         '@storybook/addon-knobs',
+        '@storybook/preset-typescript',
     ],
     webpackFinal: async (config, { configType }) => {
+
+        config.resolve.modules = [
+            ...(config.resolve.modules || []),
+            path.resolve('./'),
+        ];
+
         config.module.rules.push({
             test: /\.scss$/,
             use: ['style-loader', 'css-loader', 'sass-loader'],
@@ -38,12 +45,19 @@ module.exports = {
                     transpileOnly: true
                 },
             }],
+            resolve: {
+                alias: {
+                    '@/static': path.resolve(__dirname, '../static'),
+                    '~/': path.resolve(__dirname, '../app'),
+                },
+            },
         });
         config.module.rules.push({
             test: /\.(ts|vue)$/,
             resolve: {
                 alias: {
                     '@/static': path.resolve(__dirname, '../static'),
+                    '~/': path.resolve(__dirname, '../app'),
                 },
             },
         });
