@@ -1,95 +1,135 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
+  <div>
+    <SquareFrame frame-type="M">
+      <div class="circle_image_top">
+        <CircleImage view-box="0 0 201 201" />
+        <div class="lock_image">
+          <LockImage />
+        </div>
       </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire">
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+      <div class="elements_root">
+        <div class="element_block">
+          <Label font-style="h2" text-color="w">MEMBERS LOGIN</Label>
+        </div>
+        <br />
+        <div class="element_block">
+          <InputForm placeholder-bg-color="k">
+            <Label font-style="h4" text-color="a">LOGIN ID</Label>
+          </InputForm>
+        </div>
+        <br />
+        <div class="element_block">
+          <InputForm placeholder-bg-color="k">
+            <Label font-style="h4" text-color="a">PASSWORD</Label>
+          </InputForm>
+        </div>
+        <br />
+        <div class="element_block">
+          <SquareButton button-size="smallBtn" button-color="g">
+            <Label font-style="h4" text-color="w">LOGIN</Label>
+          </SquareButton>
+        </div>
+      </div>
+      <div class="circle_image_bottm_left">
+        <SmallCircleImage view-box="0 0 81 81" />
+        <div class="account_add">
+          <AccountAddIcon view-box="0 0 63 43" />
+        </div>
+      </div>
+      <div class="circle_image_bottm_right">
+        <SmallCircleImage view-box="0 0 81 81" />
+        <div class="foget_password">
+          <FogetPasswordIcon view-box="0 0 63 47" />
+        </div>
+      </div>
+    </SquareFrame>
+  </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api'
+import CircleImage from '@/static/layout_circle.svg'
+import LockImage from '@/static/lock.svg'
+import SmallCircleImage from '@/static/layout_circle-s.svg'
+import AccountAddIcon from '@/static/icon-account_add.svg'
+import FogetPasswordIcon from '@/static/icon-foget_password.svg'
+import SquareButton from '~/components/atoms/SquareButton/index.vue'
+import Label from '~/components/atoms/Label/index.vue'
+import SquareFrame from '~/components/atoms/SquareFrame/index.vue'
+import InputForm from '~/components/atoms/InputForm/index.vue'
 
-export default {
+export default defineComponent({
   components: {
-    Logo,
-    VuetifyLogo,
+    SquareButton,
+    Label,
+    SquareFrame,
+    InputForm,
+    CircleImage,
+    SmallCircleImage,
+    LockImage,
+    AccountAddIcon,
+    FogetPasswordIcon,
   },
-}
+})
 </script>
+
+<style lang="scss">
+.square_frame {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(20%);
+  & .circle_image_top {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-70%);
+    & > svg {
+      width: 181px;
+      height: 181px;
+    }
+    & .lock_image {
+      position: absolute;
+      display: inline-block;
+      top: 0;
+      left: 50%;
+      margin: 0;
+      transform: translateX(-50%) translateY(60%);
+      z-index: 1;
+    }
+  }
+  & .circle_image_bottm_left {
+    position: absolute;
+    display: inline-block;
+    top: 98%;
+    left: 50%;
+    & .account_add {
+      position: absolute;
+      display: inline-block;
+      top: 26%;
+      left: 16%;
+    }
+  }
+  & .circle_image_bottm_right {
+    position: absolute;
+    display: inline-block;
+    top: 98%;
+    left: 75%;
+    & .foget_password {
+      position: absolute;
+      display: inline-block;
+      top: 26%;
+      left: 17%;
+    }
+  }
+}
+.elements_root {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-45%);
+  & .element_block {
+    text-align: center;
+  }
+}
+</style>

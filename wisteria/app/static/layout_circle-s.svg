@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="81" height="81" viewBox="0 0 71 71" preserveAspectRatio="none" style="display: block;">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #ff8900;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        stroke: none;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="circle" class="cls-1">
+    <circle class="cls-2" cx="40.5" cy="40.5" r="40.5"/>
+    <circle class="cls-3" cx="40.5" cy="40.5" r="38"/>
+  </g>
+</svg>

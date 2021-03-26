@@ -5,10 +5,12 @@ module.exports = {
     node: true,
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    //    parser: 'babel-eslint',
+    parser: '@typescript-eslint/parser',
   },
   extends: [
-    '@nuxtjs',
+    //    '@nuxtjs',
+    '@nuxtjs/eslint-config-typescript',
     'prettier',
     'prettier/vue',
     'plugin:prettier/recommended',
@@ -16,5 +18,7 @@ module.exports = {
   ],
   plugins: ['prettier'],
   // add your custom rules here
-  rules: {},
+  rules: {
+    'nuxt/no-cjs-in-config': 'off',
+  },
 }

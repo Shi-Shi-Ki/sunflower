@@ -1,5 +1,6 @@
-import colors from 'vuetify/es5/util/colors'
+//import colors from 'vuetify/es5/util/colors'
 
+const path = require("path");
 export default {
   /*
    ** Nuxt rendering mode
@@ -27,19 +28,23 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@/static/common.scss',
+  ],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['@/plugins/composition-api'],
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify',
+    //'@nuxtjs/vuetify',
+    // '@nuxtjs/composition-api',
+    '@nuxt/typescript-build',
   ],
   /*
    ** Nuxt.js modules
@@ -47,6 +52,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/style-resources',
   ],
   /*
    ** Axios module configuration
@@ -57,6 +63,7 @@ export default {
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
+/*
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
@@ -74,11 +81,29 @@ export default {
       },
     },
   },
+*/
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    extend: (config) => {
+      const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: 'vue-svg-loader',
+      })
+    },
+  },
+  resolve: {
+    extensions: ['.js', '.json', '.vue', '.ts'],
+    root: path.resolve(__dirname),
+    alias: {
+      '@': path.resolve(__dirname),
+      '~': path.resolve(__dirname),
+    },
+  },
   server: {
     host: '0.0.0.0',
     port: 8080,

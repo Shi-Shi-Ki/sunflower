@@ -1,0 +1,16 @@
+.square_button {
+  position: relative;
+  display: inline-block;
+  & .square_button_text {
+    position: absolute;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    // relative+absoluteを使った場合のセンタリング方法
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  }
+}

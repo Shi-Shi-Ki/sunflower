@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="245" height="106" viewBox="0 0 245 106" preserveAspectRatio="none" style="display: block;">
+  <defs>
+    <style>
+      svg {
+        overflow: visible;
+        filter:
+          drop-shadow(2px 2px 2px #267200)
+          drop-shadow(-2px 2px 2px #267200)
+          drop-shadow(2px -2px 2px #267200)
+          drop-shadow(-2px -2px 2px #267200);
+      }
+      .cls-1, .cls-2 {
+        fill: #38b700;
+      }
+
+      .cls-1 {
+        stroke: #267200;
+      }
+
+      .cls-3 {
+        stroke: none;
+      }
+
+      .cls-4 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="b-login" transform="translate(-411 -822)">
+    <g id="shadow" class="cls-1" transform="translate(426 837)">
+      <rect class="cls-3" width="215" height="76" rx="10"/>
+      <rect class="cls-4" x="0.5" y="0.5" width="214" height="75" rx="9.5"/>
+    </g>
+    <g id="button" transform="translate(431 842)">
+      <rect id="base" class="cls-2" width="205" height="66" rx="10"/>
+    </g>
+  </g>
+</svg>

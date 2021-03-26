@@ -1,0 +1,51 @@
+@mixin commonStyle() {
+  display: inline-block;
+  font-family: 'Hiragino Kaku Gothic ProN';
+  font-weight: normal;
+}
+@mixin colorTypes() {
+  &-w {
+    @content;
+    color: #fff;
+  }
+  &-k {
+    @content;
+    color: #000;
+  }
+  &-a {
+    @content;
+    color: #ccc;
+  }
+}
+.base_text {
+  &-h1 {
+    @include colorTypes() {
+      @include commonStyle();
+      font-size: 40px;
+    }
+  }
+  &-h2 {
+    @include colorTypes() {
+      @include commonStyle();
+      font-size: 30px;
+    }
+  }
+  &-h3 {
+    @include colorTypes() {
+      @include commonStyle();
+      font-size: 20px;
+    }
+  }
+  &-h4 {
+    @include colorTypes() {
+      @include commonStyle();
+      font-size: 15px;
+    }
+  }
+  &-h5 {
+    @include colorTypes() {
+      @include commonStyle();
+      font-size: 10px;
+    }
+  }
+}

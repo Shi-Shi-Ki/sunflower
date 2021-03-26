@@ -1,0 +1,98 @@
+/*
+ * https://qiita.com/KengoShimizu/items/22c14b282fa9f53f4bd8
+ * https://coliss.com/articles/build-websites/operation/css/css-only-floating-label.html
+ */
+@mixin placeholder_text_transform($fontColor) {
+  // プレスホルダーのテキストが退避した時に変わる文字色
+  & > div {
+    color: $fontColor;
+  }
+  font-size: 15px;
+  line-height: 10px;
+  width: auto;
+  height: auto;
+  padding: 0 2px;
+  transform: translate3d(-5px, -23px, 0);
+  // 複数のクラスを指定する場合はスペースなし
+  &.placeholder_bg_color {
+    &-w {
+      background-color: #fff;
+    }
+    &-k {
+      background-color: #000;
+    }
+  }
+}
+@mixin input_text_style($fontColor, $width) {
+  color: $fontColor;
+  position: absolute;
+  width: $width - 50px;
+  height: auto;
+  top: 23px;
+  left: 19px;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  // フォーカスインおよびアウト時の枠線を非表示
+  border: none;
+  outline: none;
+  // 入力フォームを前面に持ってくる
+  z-index: 1;
+  // 背部のtextが見えるように透明化
+  background-color: transparent;
+  // フォーカス時のプレスホルダーアニメーション
+  &:focus + .placeholder_text {
+    @include placeholder_text_transform(#3be5ae);
+  }
+  // 入力済みだった場合はプレスホルダー文字列の位置を退避位置のままにする
+  // プレスホルダーが表示中（空欄だった場合）はフォームの上に戻る
+  &:not(:placeholder-shown) + .placeholder_text {
+    @include placeholder_text_transform(#3be5ae);
+  }
+}
+.input_form {
+  position: relative;
+  display: inline-block;
+  $flameWidth: 300px;
+  $flameHeight: 63px;
+  & .frame_image {
+    width: $flameWidth;
+    height: $flameHeight;
+    & > g {
+      stroke: #ccc;
+      // gタグ以下のrectタグ2つに対してのstyle設定
+      // svgを入力フォームの枠線に使っているのでややこしくなっているが、あくまで実験なので無視...
+      & > rect:nth-of-type(1) {
+        width: $flameWidth;
+        height: $flameHeight;
+      }
+      & > rect:nth-of-type(2) {
+        width: $flameWidth - 3px;
+        height: $flameHeight - 3px;
+      }
+    }
+  }
+  & .input_text {
+    &-w {
+      @include input_text_style(#fff, $flameWidth);
+    }
+    &-k {
+      @include input_text_style(#000, $flameWidth);
+    }
+  }
+  & .placeholder_text {
+    position: absolute;
+    width: auto;
+    height: auto;
+    top: 21px;
+    left: 19px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    color: #ccc;
+    background-color: transparent;
+    // アニメーションのディレイ設定
+    transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+  }
+}
