@@ -13,8 +13,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
-import { BaseButton } from '~/components/atoms/BaseButton'
-import { BaseText } from '~/components/atoms/BaseText'
+import BaseButton from '~/components/atoms/BaseButton/index.vue'
+import BaseText from '~/components/atoms/BaseText/index.vue'
 
 interface Props {
   type: string

@@ -1,7 +1,7 @@
 <template>
   <div class="input_form">
     <component :is="ifFrame">
-      <InputFormFrame class="frame_image" />
+      <component :is="buttonSize" class="frame_image"></component>
       <input
         type="text"
         :class="'input_text-' + inputTextColor"
@@ -19,14 +19,19 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import InputFormFrame from '@/static/input_form.svg'
+// import InputFormFrame from '@/static/input_form.svg'
 
 export default defineComponent({
   name: 'InputForm',
   components: {
-    InputFormFrame,
+    // InputFormFrame,
+    inputFormFrame: () => import('@/static/input_form.svg'),
   },
   props: {
+    iFormFrame: {
+      type: String,
+      default: 'inputFormFrame',
+    },
     ifFrame: {
       type: String,
       default: 'div',

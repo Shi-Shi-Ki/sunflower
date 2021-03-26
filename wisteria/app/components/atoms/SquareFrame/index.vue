@@ -1,20 +1,23 @@
 <template>
   <div :class="['square_frame', 'frame_type-' + frameType]">
-    <FrameImage class="square_frame_image" />
+    <component :is="frImage" class="square_frame_image"></component>
     <div class="square_frame_area"><slot /></div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import FrameImage from '@/static/square_frame.svg'
 
 export default defineComponent({
   name: 'SquareFrame',
   components: {
-    FrameImage,
+    frameImage: () => import('~/static/square_frame.svg'),
   },
   props: {
+    frImage: {
+      type: String,
+      default: 'frameImage',
+    },
     sqFrame: {
       type: String,
       default: 'div',

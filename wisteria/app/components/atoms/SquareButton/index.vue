@@ -11,8 +11,7 @@ import { defineComponent } from '@vue/composition-api'
 export default defineComponent({
   name: 'SquareButton',
   components: {
-    middleBtn: () => import('@/static/square_button-m-g.svg'),
-    smallBtn: () => import('@/static/square_button-s-g.svg'),
+    middleBtn: () => import('~/static/square_button-m-g.svg'),
   },
   props: {
     buttonSize: {
